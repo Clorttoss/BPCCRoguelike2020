@@ -29,7 +29,7 @@ public class Player : MonoBehaviour
         {
             //Creates Vector for a new targeted position
             Vector2 targetMovePosition = new Vector2(transform.position.x, transform.position.y + 1);
-            //Shoots a raycast at the target position which only travels for up 0.1f before ending
+            //Creates a raycast at the target position which only travels for up 0.1f before ending
             RaycastHit2D hit = Physics2D.Raycast(targetMovePosition, Vector2.up,0.1f);
 
             //If ray does not hit/collide sets new position to the target
@@ -48,7 +48,7 @@ public class Player : MonoBehaviour
         {
             //Creates Vector for a new targeted position
             Vector2 targetMovePosition = new Vector2(transform.position.x, transform.position.y + -1);
-            //Shoots a raycast at the target position which only travels for up 0.1f before ending
+            //Creates a raycast at the target position which only travels for up 0.1f before ending
             RaycastHit2D hit = Physics2D.Raycast(targetMovePosition, Vector2.up, 0.1f);
 
             //If ray does not hit/collide sets new position to the target
@@ -69,7 +69,7 @@ public class Player : MonoBehaviour
         {
             //Creates Vector for a new targeted position
             Vector2 targetMovePosition = new Vector2(transform.position.x-1, transform.position.y);
-            //Shoots a raycast at the target position which only travels up for 0.1f before ending
+            //Creates a raycast at the target position which only travels up for 0.1f before ending
             RaycastHit2D hit = Physics2D.Raycast(targetMovePosition, Vector2.up, 0.1f);
 
             //If ray does not hit/collide sets new position to the target
@@ -91,7 +91,7 @@ public class Player : MonoBehaviour
         {
             //Creates Vector for a new targeted position
             Vector2 targetMovePosition = new Vector2(transform.position.x+1, transform.position.y);
-            //Shoots a raycast at the target position which only travels up for 0.1f before ending
+            //Creates a raycast at the target position which only travels up for 0.1f before ending
             RaycastHit2D hit = Physics2D.Raycast(targetMovePosition, Vector2.up, 0.1f);
 
             //If ray does not hit/collide sets new position to the target
