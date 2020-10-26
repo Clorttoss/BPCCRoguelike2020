@@ -22,27 +22,92 @@ public class Player : MonoBehaviour
         //movement.y = Input.GetAxisRaw("Vertical");
 
 
+        
 
+        //Allen
         if (Input.GetKeyDown("w") || Input.GetKeyDown("up"))
         {
-            print("up key was pressed");
+            //Creates Vector for a new targeted position
+            Vector2 targetMovePosition = new Vector2(transform.position.x, transform.position.y + 1);
+            //Shoots a raycast at the target position which only travels for up 0.1f before ending
+            RaycastHit2D hit = Physics2D.Raycast(targetMovePosition, Vector2.up,0.1f);
 
-            transform.position = new Vector2(transform.position.x, transform.position.y+1);
+            //If ray does not hit/collide sets new position to the target
+            if (hit.collider == null)
+            {   
+                transform.position = targetMovePosition;
+            }else{
+                print("Ray cast hit");
+                Debug.Log("Ray Hit: " + hit.transform.name);
+            }
+
+            print("up key was pressed");
         }
+
         if (Input.GetKeyDown("s") || Input.GetKeyDown("down"))
         {
+            //Creates Vector for a new targeted position
+            Vector2 targetMovePosition = new Vector2(transform.position.x, transform.position.y + -1);
+            //Shoots a raycast at the target position which only travels for up 0.1f before ending
+            RaycastHit2D hit = Physics2D.Raycast(targetMovePosition, Vector2.up, 0.1f);
+
+            //If ray does not hit/collide sets new position to the target
+            if (hit.collider == null)
+            {
+                transform.position = targetMovePosition;
+            }
+            else
+            {
+                print("Ray cast hit");
+                Debug.Log("Ray Hit: " + hit.transform.name);
+            }
+
             print("down key was pressed");
-            transform.position = new Vector2(transform.position.x, transform.position.y-1);
         }
-        if(Input.GetKeyDown("a") || Input.GetKeyDown("left"))
+
+        if (Input.GetKeyDown("a") || Input.GetKeyDown("left"))
         {
+            //Creates Vector for a new targeted position
+            Vector2 targetMovePosition = new Vector2(transform.position.x-1, transform.position.y);
+            //Shoots a raycast at the target position which only travels up for 0.1f before ending
+            RaycastHit2D hit = Physics2D.Raycast(targetMovePosition, Vector2.up, 0.1f);
+
+            //If ray does not hit/collide sets new position to the target
+            if (hit.collider == null)
+            {
+                transform.position = targetMovePosition;
+            }
+            else
+            {
+                print("Ray cast hit");
+                Debug.Log("Ray Hit: " + hit.transform.name);
+            }
+
             print("left key was pressed");
-            transform.position = new Vector2(transform.position.x-1, transform.position.y);
+        
         }
-        if(Input.GetKeyDown("d") || Input.GetKeyDown("right"))
+
+        if (Input.GetKeyDown("d") || Input.GetKeyDown("right"))
         {
+            //Creates Vector for a new targeted position
+            Vector2 targetMovePosition = new Vector2(transform.position.x+1, transform.position.y);
+            //Shoots a raycast at the target position which only travels up for 0.1f before ending
+            RaycastHit2D hit = Physics2D.Raycast(targetMovePosition, Vector2.up, 0.1f);
+
+            //If ray does not hit/collide sets new position to the target
+            if (hit.collider == null)
+            {
+                transform.position = targetMovePosition;
+            }
+            else
+            {
+                print("Ray cast hit");
+                Debug.Log("Ray Hit: " + hit.transform.name);
+            }
+
             print("right key was pressed");
-            transform.position = new Vector2(transform.position.x+1, transform.position.y);
+        //<Allen>
+
         }
         //Nicolas
         if (Input.GetKeyDown("g"))
