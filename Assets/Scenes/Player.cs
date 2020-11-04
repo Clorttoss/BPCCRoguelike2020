@@ -4,19 +4,26 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : Collision
 {
-    //Nicolas
+    //11/3/2020 -- Added in Collision.cs and dependency to it in Player.cs.  Moved repeated code to Collision.cs as a hitCheck function. Cleaned up a bit.  -- Nicolas
+
     public int strength = 2, defense = 2, luck = 0, speed = 2, gold = 0, 
         strGold = 100, defGold = 100, luckGold = 200, speedGold = 1000;
+<<<<<<< Updated upstream
     public float difficulty = 1.4;
     //<Nicolas>
 
     public Rigidbody2D rb;
     //Vector2 movement;
+=======
+    public float difficulty = 1.4f;
 
-    // Update is called once per frame
+    public Boolean PlayerTurn = true;
+>>>>>>> Stashed changes
+
     void Update()
+<<<<<<< Updated upstream
     {
         //movement.x = Input.GetAxisRaw("Horizontal");
         //movement.y = Input.GetAxisRaw("Vertical");
@@ -28,21 +35,88 @@ public class Player : MonoBehaviour
             print("up key was pressed");
 
             transform.position = new Vector2(transform.position.x, transform.position.y+1);
+=======
+    {  
+        //Allen
+        if (Input.GetKeyDown("w") || Input.GetKeyDown("up"))
+        {
+            if (PlayerTurn == true)
+            {
+                //Creates Vector for a new targeted position
+                Vector2 targetMovePosition = new Vector2(transform.position.x, transform.position.y + 1);
+                //Creates a raycast at the target position which only travels for up 0.1f before ending
+
+                hitCheck(targetMovePosition);
+
+                PlayerTurn = false;
+                print("up key was pressed");
+            }
+>>>>>>> Stashed changes
         }
         if (Input.GetKeyDown("s") || Input.GetKeyDown("down"))
         {
+<<<<<<< Updated upstream
             print("down key was pressed");
             transform.position = new Vector2(transform.position.x, transform.position.y-1);
+=======
+            if (PlayerTurn == true)
+            {
+                //Creates Vector for a new targeted position
+                Vector2 targetMovePosition = new Vector2(transform.position.x, transform.position.y + -1);
+                //Creates a raycast at the target position which only travels for up 0.1f before ending
+
+                hitCheck(targetMovePosition);
+
+                PlayerTurn = false;
+                print("down key was pressed");
+            }
+>>>>>>> Stashed changes
         }
         if(Input.GetKeyDown("a") || Input.GetKeyDown("left"))
         {
+<<<<<<< Updated upstream
             print("left key was pressed");
             transform.position = new Vector2(transform.position.x-1, transform.position.y);
+=======
+            if (PlayerTurn == true)
+            {
+                //Creates Vector for a new targeted position
+                Vector2 targetMovePosition = new Vector2(transform.position.x - 1, transform.position.y);
+                //Creates a raycast at the target position which only travels up for 0.1f before ending
+                RaycastHit2D hit = Physics2D.Raycast(targetMovePosition, Vector2.up, 0.1f);
+
+                hitCheck(targetMovePosition);
+
+                PlayerTurn = false;
+                print("left key was pressed");
+            }
+>>>>>>> Stashed changes
         }
         if(Input.GetKeyDown("d") || Input.GetKeyDown("right"))
         {
+<<<<<<< Updated upstream
             print("right key was pressed");
             transform.position = new Vector2(transform.position.x+1, transform.position.y);
+=======
+            if (PlayerTurn == true)
+            {
+                //Creates Vector for a new targeted position
+                Vector2 targetMovePosition = new Vector2(transform.position.x + 1, transform.position.y);
+                //Creates a raycast at the target position which only travels up for 0.1f before ending
+                RaycastHit2D hit = Physics2D.Raycast(targetMovePosition, Vector2.up, 0.1f);
+
+                hitCheck(targetMovePosition);
+
+                PlayerTurn = false;
+                print("right key was pressed");
+            }
+        }
+
+        if (Input.GetKeyDown("e"))
+        {
+            playerTurn();
+            print("The E key was pressed. PlayerTurn = " + PlayerTurn);
+>>>>>>> Stashed changes
         }
         //Nicolas
         if (Input.GetKeyDown("g"))
@@ -74,6 +148,13 @@ public class Player : MonoBehaviour
 
     }
 
+
+    //Nicolas
+    public void playerTurn()
+    {
+        PlayerTurn = true;
+    }
+    //<Nicolas>
     void FixedUpdate()
     {
         //rb.MovePosition(rb.position + movement);
