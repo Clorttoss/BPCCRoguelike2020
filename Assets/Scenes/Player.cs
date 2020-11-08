@@ -35,15 +35,12 @@ public class Player : MonoBehaviour
                 RaycastHit2D hit = Physics2D.Raycast(targetMovePosition, Vector2.up, 0.1f);
 
                 //If ray does not hit/collide sets new position to the target
-                if (hit.collider == null)
+                if (hit.collider == null || hit.collider.gameObject.name == "Stairs")
                 {
                     transform.position = targetMovePosition;
                 }
-                else
-                {
-                    print("Ray cast hit");
-                    Debug.Log("Ray Hit: " + hit.transform.name);
-                }
+
+                else {Debug.Log("Ray Hit: " + hit.transform.name);}
 
                 PlayerTurn = false;
                 print("up key was pressed");
@@ -60,15 +57,12 @@ public class Player : MonoBehaviour
                 RaycastHit2D hit = Physics2D.Raycast(targetMovePosition, Vector2.up, 0.1f);
 
                 //If ray does not hit/collide sets new position to the target
-                if (hit.collider == null)
+                if (hit.collider == null || hit.collider.gameObject.name == "Stairs")
                 {
                     transform.position = targetMovePosition;
                 }
-                else
-                {
-                    print("Ray cast hit");
-                    Debug.Log("Ray Hit: " + hit.transform.name);
-                }
+                
+                else{Debug.Log("Ray Hit: " + hit.transform.name);}
 
                 PlayerTurn = false;
                 print("down key was pressed");
@@ -85,15 +79,12 @@ public class Player : MonoBehaviour
                 RaycastHit2D hit = Physics2D.Raycast(targetMovePosition, Vector2.up, 0.1f);
 
                 //If ray does not hit/collide sets new position to the target
-                if (hit.collider == null)
+                if (hit.collider == null || hit.collider.gameObject.name == "Stairs")
                 {
                     transform.position = targetMovePosition;
                 }
-                else
-                {
-                    print("Ray cast hit");
-                    Debug.Log("Ray Hit: " + hit.transform.name);
-                }
+
+                else{Debug.Log("Ray Hit: " + hit.transform.name);}
 
                 PlayerTurn = false;
                 print("left key was pressed");
@@ -110,15 +101,12 @@ public class Player : MonoBehaviour
                 RaycastHit2D hit = Physics2D.Raycast(targetMovePosition, Vector2.up, 0.1f);
 
                 //If ray does not hit/collide sets new position to the target
-                if (hit.collider == null)
+                if (hit.collider == null || hit.collider.gameObject.name == "Stairs")
                 {
                     transform.position = targetMovePosition;
                 }
-                else
-                {
-                    print("Ray cast hit");
-                    Debug.Log("Ray Hit: " + hit.transform.name);
-                }
+
+                else {Debug.Log("Ray Hit: " + hit.transform.name);}
 
                 PlayerTurn = false;
                 print("right key was pressed");
