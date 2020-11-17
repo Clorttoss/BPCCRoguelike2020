@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
     public Rigidbody2D rb;
     public Boolean PlayerTurn = true;
 
+
     // Update is called once per frame
     void Update()
     {
