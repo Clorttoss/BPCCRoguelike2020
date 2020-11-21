@@ -51,13 +51,11 @@ public class MyEnemy : MonoBehaviour
 
     }
 
+    //This is the basic attack method of just walking up to the player and whacking them.
     protected void onCantMove<T>(T component)
-    {
-        
-        //Player hitPlayer = component as Player;
-
-        //There's no method I saw for losing gold or health for the PLayer, so I just added this in for when that's implemented. (Unless I overlooked it when is possible)
-        myPlayer.loseGold(playerDamage);
+    {        
+        Player hitPlayer = component as Player;
+        hitPlayer.loseGold(playerDamage);
     }
 
     //Again, stolen from the tutorial until I can figure the pathfinding
