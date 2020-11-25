@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
 
-public class MyEnemy : MovingObject
+public class MyEnemy : Completed.MovingObject
 {
     //This is a mess and I am completely sorry for it.
 
@@ -26,9 +26,9 @@ public class MyEnemy : MovingObject
 
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
-        animator = GetComponent<Animator> ();
+        animator = GetComponent<Animator>();
         //GameManager.instance.AddMyEnemyToList (this);
         target = GameObject.FindGameObjectWithTag("Player").transform;
         base.Start();
@@ -37,10 +37,10 @@ public class MyEnemy : MovingObject
     // Update is called once per frame
     void Update()
     {
-        
+
     }
-        //Pretty much copied this from the tutorial, but I found a way to add pathfinding to the enemy movement. I need to make another class for this, so wanted to run it
-        //by you guys first. This is just the normal stuff, just to make sure it works.
+    //Pretty much copied this from the tutorial, but I found a way to add pathfinding to the enemy movement. I need to make another class for this, so wanted to run it
+    //by you guys first. This is just the normal stuff, just to make sure it works.
     public void enemyMove()
     {
         int xDir = 0;
@@ -58,16 +58,16 @@ public class MyEnemy : MovingObject
     }
 
     //This is the basic attack method of just walking up to the player and whacking them.
-    protected void onCantMove<T>(T component)
-    {        
+    protected override void OnCantMove<T>(T component)
+    {
         Player hitPlayer = component as Player;
-        hitPlayer.loseGold(playerDamage);
+        //hitPlayer.loseGold(playerDamage);
 
-        animator.SetTrigger ("enemyAttack");
+        animator.SetTrigger("enemyAttack");
     }
 
     //Again, stolen from the tutorial until I can figure the pathfinding
-    protected void attemptMove<T>(int xDir, int yDir)
+    protected void AttemptMove<T>(int xDir, int yDir)
     {
 
         if (skipMove)
@@ -77,16 +77,20 @@ public class MyEnemy : MovingObject
             return;
         }
 
-        base.attemptMove<T>(xDir, yDir);
+        base.AttemptMove<Component>(xDir, yDir);
 
         skipMove = true;
 
     }
 
-    public void onDeath() {
+    public void onDeath()
+    {
         if (Health <= 0)
+        {
             myPlayer.addGold(Gold);
+        }
     }
+}
 
 
   /*  private List<Path> GetAdjacentSquares(Path p)
