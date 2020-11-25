@@ -5,6 +5,7 @@ using UnityEngine;
 public class UIController : MonoBehaviour
 {
 
+    //Allen
     private Player PlayerObject;
     // Start is called before the first frame update
     void Start()
@@ -26,4 +27,5 @@ public class UIController : MonoBehaviour
         GUI.Label(new Rect(100, 320, 100, 20), "Defense: " + PlayerObject.defense);
         GUI.Label(new Rect(100, 340, 100, 20), "Gold: " + PlayerObject.gold);
     }
+    //<Allen>
 }
