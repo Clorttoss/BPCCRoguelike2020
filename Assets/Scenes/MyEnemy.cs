@@ -13,6 +13,7 @@ public class MyEnemy : MovingObject
     public int Gold = 5; //Placeholder for testing.
     //GameObject player;
     private Transform target;
+    private Animator animator;
     private bool skipMove;
     Player myPlayer;
 
@@ -27,6 +28,7 @@ public class MyEnemy : MovingObject
     // Start is called before the first frame update
     void Start()
     {
+        animator = GetComponent<Animator> ();
         //GameManager.instance.AddMyEnemyToList (this);
         target = GameObject.FindGameObjectWithTag("Player").transform;
         base.Start();
@@ -60,6 +62,8 @@ public class MyEnemy : MovingObject
     {        
         Player hitPlayer = component as Player;
         hitPlayer.loseGold(playerDamage);
+
+        animator.SetTrigger ("enemyAttack");
     }
 
     //Again, stolen from the tutorial until I can figure the pathfinding
