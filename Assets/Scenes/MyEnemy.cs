@@ -18,12 +18,13 @@ public class MyEnemy : MonoBehaviour
 
     public Rigidbody2D en;
     Path nextMove = bestPath[0];
-    //bestPath.RemoveAt(0);
+    bestPath.RemoveAt(0);
 
 
     // Start is called before the first frame update
     void Start()
     {
+        GameManager.instance.AddMyEnemyToList (this);
         target = GameObject.FindGameObjectWithTag("Player").transform;
         base.Start();
     }
@@ -69,7 +70,7 @@ public class MyEnemy : MonoBehaviour
             return;
         }
 
-        base.attemptMove<T>(xDir, yDir);
+        //base.attemptMove<T>(xDir, yDir);
 
         skipMove = true;
 
@@ -122,8 +123,8 @@ public class MyEnemy : MonoBehaviour
 
     function HappyPath()
     {
-        Path destinationSquare = new Path(/* target position */);
-        evaluationList.Add(new Path(/* starting position */));
+        Path destinationSquare = new Path(target.position.x, target.position.y);
+        evaluationList.Add(new Path(transform.position.x, transform.position.y));
         Path currentSquare = null;
         while (evaluationList.Count > 0)
         {
