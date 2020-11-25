@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
 
-public class MyEnemy : MonoBehaviour
+public class MyEnemy : MovingObject
 {
     //This is a mess and I am completely sorry for it.
 
@@ -17,8 +17,11 @@ public class MyEnemy : MonoBehaviour
     Player myPlayer;
 
     public Rigidbody2D en;
-    Path nextMove = bestPath[0];
-    bestPath.RemoveAt(0);
+
+    //JUST UNTIL I FIGURE OUT WHAT I DID WRONG HERE
+
+    //Path nextMove = bestPath[0];
+    //bestPath.RemoveAt(0);
 
 
     // Start is called before the first frame update
@@ -70,7 +73,7 @@ public class MyEnemy : MonoBehaviour
             return;
         }
 
-        //base.attemptMove<T>(xDir, yDir);
+        base.attemptMove<T>(xDir, yDir);
 
         skipMove = true;
 
@@ -82,7 +85,7 @@ public class MyEnemy : MonoBehaviour
     }
 
 
-    private List<Path> GetAdjacentSquares(Path p)
+  /*  private List<Path> GetAdjacentSquares(Path p)
     {
         List<Path> ret = new List<Path>();
         int _x = p.x;
@@ -197,3 +200,4 @@ class Path : object
         }
     }
 }
+*/
