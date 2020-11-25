@@ -27,7 +27,7 @@ public class MyEnemy : MovingObject
     // Start is called before the first frame update
     void Start()
     {
-        GameManager.instance.AddMyEnemyToList (this);
+        //GameManager.instance.AddMyEnemyToList (this);
         target = GameObject.FindGameObjectWithTag("Player").transform;
         base.Start();
     }
