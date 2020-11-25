@@ -10,23 +10,20 @@ public class Player : Collision
 
     public int strength = 2, defense = 2, luck = 0, speed = 2, gold = 0, 
         strGold = 100, defGold = 100, luckGold = 200, speedGold = 1000;
-<<<<<<< Updated upstream
     public float difficulty = 1.4;
     //<Nicolas>
 
     public Rigidbody2D rb;
-    //Vector2 movement;
-=======
+
     public float difficulty = 1.4f;
 
     public Boolean PlayerTurn = true;
->>>>>>> Stashed changes
+
 
     void Update()
-<<<<<<< Updated upstream
+
     {
-        //movement.x = Input.GetAxisRaw("Horizontal");
-        //movement.y = Input.GetAxisRaw("Vertical");
+
 
 
 
@@ -35,7 +32,7 @@ public class Player : Collision
             print("up key was pressed");
 
             transform.position = new Vector2(transform.position.x, transform.position.y+1);
-=======
+
     {  
         //Allen
         if (Input.GetKeyDown("w") || Input.GetKeyDown("up"))
@@ -51,14 +48,14 @@ public class Player : Collision
                 PlayerTurn = false;
                 print("up key was pressed");
             }
->>>>>>> Stashed changes
+
         }
         if (Input.GetKeyDown("s") || Input.GetKeyDown("down"))
         {
-<<<<<<< Updated upstream
+
             print("down key was pressed");
             transform.position = new Vector2(transform.position.x, transform.position.y-1);
-=======
+
             if (PlayerTurn == true)
             {
                 //Creates Vector for a new targeted position
@@ -70,14 +67,14 @@ public class Player : Collision
                 PlayerTurn = false;
                 print("down key was pressed");
             }
->>>>>>> Stashed changes
+
         }
         if(Input.GetKeyDown("a") || Input.GetKeyDown("left"))
         {
-<<<<<<< Updated upstream
+
             print("left key was pressed");
             transform.position = new Vector2(transform.position.x-1, transform.position.y);
-=======
+
             if (PlayerTurn == true)
             {
                 //Creates Vector for a new targeted position
@@ -90,14 +87,14 @@ public class Player : Collision
                 PlayerTurn = false;
                 print("left key was pressed");
             }
->>>>>>> Stashed changes
+
         }
         if(Input.GetKeyDown("d") || Input.GetKeyDown("right"))
         {
-<<<<<<< Updated upstream
+
             print("right key was pressed");
             transform.position = new Vector2(transform.position.x+1, transform.position.y);
-=======
+
             if (PlayerTurn == true)
             {
                 //Creates Vector for a new targeted position
@@ -116,7 +113,7 @@ public class Player : Collision
         {
             playerTurn();
             print("The E key was pressed. PlayerTurn = " + PlayerTurn);
->>>>>>> Stashed changes
+
         }
         //Nicolas
         if (Input.GetKeyDown("g"))
