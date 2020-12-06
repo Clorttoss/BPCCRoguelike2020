@@ -23,8 +23,9 @@ public class Stairs : MonoBehaviour
         //Check for a match with the gameobject's name
         if (collision.gameObject.name == "Player")
         {
+            GlobalInfo.Instance.level++;
             //Roll Random Number and load a room from switch case
-            int RoomRoll = Random.Range(1, 4);
+            int RoomRoll = Random.Range(1, 5);
             print("Player has reached stairs, Rolling for new dungeon room: " + RoomRoll);
             switch (RoomRoll)
             {

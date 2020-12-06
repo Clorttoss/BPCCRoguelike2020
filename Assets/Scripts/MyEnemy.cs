@@ -4,18 +4,20 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
 
-public class MyEnemy : Completed.MovingObject
+public class MyEnemy : MonoBehaviour
 {
     //This is a mess and I am completely sorry for it.
 
-    public int playerDamage;
-    public int Health = 3; //3 hits?
     public int Gold = 5; //Placeholder for testing.
-    //GameObject player;
+    public int attack;
+    public int defense;
     private Transform target;
+    
+    Player myPlayer;
     private Animator animator;
     private bool skipMove;
-    Player myPlayer;
+    private System.Random random;
+    
 
     public Rigidbody2D en;
 
@@ -26,18 +28,42 @@ public class MyEnemy : Completed.MovingObject
 
 
     // Start is called before the first frame update
-    protected override void Start()
+    void Start()
     {
-        animator = GetComponent<Animator>();
+        attack = GlobalInfo.Instance.level;
+        defense = GlobalInfo.Instance.level - 1;
+        Gold = 5 * GlobalInfo.Instance.level;
+        this.animator = GetComponent<Animator>();
+        this.random = new System.Random();
         //GameManager.instance.AddMyEnemyToList (this);
-        target = GameObject.FindGameObjectWithTag("Player").transform;
-        base.Start();
+        GameObject playerGameObject = GameObject.Find("Player");
+        myPlayer = playerGameObject.GetComponent<Player>();
+        this.myPlayer.PlayerMoved += this.myPlayer_PlayerMoved;
+        if (random.Next(0, 3) == 1)
+        {
+            this.skipMove = false;
+        }
+        else
+        {
+            this.skipMove = true;
+        }
+    }
+
+    void myPlayer_PlayerMoved(object Sender, EventArgs e)
+    {
+        if (this != null)
+        {
+            if (!skipMove)
+            {
+                enemyMove();
+            }
+            skipMove = !skipMove;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-
     }
     //Pretty much copied this from the tutorial, but I found a way to add pathfinding to the enemy movement. I need to make another class for this, so wanted to run it
     //by you guys first. This is just the normal stuff, just to make sure it works.
@@ -46,49 +72,58 @@ public class MyEnemy : Completed.MovingObject
         int xDir = 0;
         int yDir = 0;
 
-        if (Mathf.Abs(target.position.x - transform.position.x) < float.Epsilon)
+        if (myPlayer.transform.position.x > this.transform.position.x)
         {
-            yDir = target.position.y > transform.position.y ? 1 : -1;
+            xDir = 1;
         }
-        else
-        { xDir = target.position.x > transform.position.x ? 1 : -1; }
+        else if (myPlayer.transform.position.x == this.transform.position.x)
+        
+        {
+            if (myPlayer.transform.position.y > this.transform.position.y)
+            {
+                yDir = 1;
+            } else if (myPlayer.transform.position.y < this.transform.position.y)
+            {
+                yDir = -1;
+            }
+        }
+        else if (myPlayer.transform.position.x < this.transform.position.x)
+        {
+            xDir = -1;
+        }
 
-        AttemptMove<Player>(xDir, yDir);
 
+        Vector2 movePosition = new Vector2(this.transform.position.x + xDir, this.transform.position.y + yDir);
+        RaycastHit2D hit = Physics2D.Raycast(movePosition, Vector2.up, 0.1f);
+
+        if (hit.collider == null || hit.collider.gameObject.name == "Stairs" || hit.collider.gameObject.name == "Gold(Clone)" || hit.collider.gameObject.name == "ItemTile(Clone)")
+        {
+            this.transform.position = movePosition;
+        }
+        if (hit.collider != null && hit.collider.gameObject.name == "Player")
+        {
+            if (random.Next(1, myPlayer.getDefense() + 1) <= attack)
+            {
+                myPlayer.health--;
+                print("Player says ow!");
+            }
+            print("Enemy Attacked.");
+        }
+
+
+        
+        print("Enemy moved.");
     }
 
     //This is the basic attack method of just walking up to the player and whacking them.
-    protected override void OnCantMove<T>(T component)
-    {
-        Player hitPlayer = component as Player;
-        //hitPlayer.loseGold(playerDamage);
+    
 
-        animator.SetTrigger("enemyAttack");
-    }
 
-    //Again, stolen from the tutorial until I can figure the pathfinding
-    protected override void AttemptMove<T>(int xDir, int yDir)
-    {
-
-        if (skipMove)
-        {
-
-            skipMove = false;
-            return;
-        }
-
-        base.AttemptMove<Component>(xDir, yDir);
-
-        skipMove = true;
-
-    }
 
     public void onDeath()
     {
-        if (Health <= 0)
-        {
-            myPlayer.addGold(Gold);
-        }
+        myPlayer.addGold(Gold);
+        Destroy(gameObject);
     }
 }
 

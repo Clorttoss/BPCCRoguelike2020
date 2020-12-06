@@ -12,7 +12,7 @@ public enum ItemType
     Boots = 4,
     Weapon = 5,
     Necklace = 6,
-    Scroll = 7,
+    //Scroll = 7 = "Scroll", //Unimplemented.
 
     //Using the Unspecified as a way to test if an Item is 'empty'.
     Unspecified = 100
@@ -20,73 +20,108 @@ public enum ItemType
 
 public class Item
 {
-    public static int types = 6;
     
+    public static int types = 6;
+
+    
+
     public ItemType itemType;
-    int strength, defense, luck, speed;
+    static Item emptyItem = new Item();
+    public int strength, defense, luck, level;
     System.Random rand = new System.Random();
 
 
-    public Item (int type, int level)
+    public Item (int level, int type)
     {
         itemType = (ItemType) type;
-        generateStats(type, level);
+        this.level = level;
+        generateStats(level, type);
     }
     public Item()
     {
         itemType = (ItemType)100;
-        generateStats(100, 0);
+        generateStats(0, 100);
 
     }
 
-    public void generateStats(int type, int level)
+    public override string ToString()
+    {
+        string output = "";
+
+        if ((int)itemType != 100)
+        {
+            String type = "";
+            switch ((int)itemType)
+            {
+                case 1:
+                    type = " Helm";
+                    break;
+                case 2:
+                    type = " Shirt";
+                    break;
+                case 3:
+                    type = " Pants";
+                    break;
+                case 4:
+                    type = " Boots";
+                    break;
+                case 5:
+                    type = " Sword";
+                    break;
+                case 6:
+                    type = " Amulet";
+                    break;
+            }
+            output += "L" + level + type + " ";
+            output += "+" + this.strength + " Str";
+            output += ", +" + this.defense + " Def";
+        }
+        return output;
+    }
+
+    public void generateStats(int level, int type)
     {
         if (type == 1)
         {
-            defense = level * (rand.Next(85, 101) / 100);
-            strength = level * (rand.Next(15, 21) / 100);
-            luck = level * (rand.Next(30, 41) / 100);
-            speed = 0;
+            
+            defense = (int)(level * ((float)rand.Next(85, 101) / 100));
+            strength = (int)(level * ((float)rand.Next(15, 21) / 100));
+            luck = (int)(level * ((float)rand.Next(30, 41) / 100));
             return;
         }
         if (type == 2)
         {
-            defense = level * (rand.Next(100, 121) / 100);
-            strength = level * (rand.Next(30, 36) / 100);
+            defense = (int)(level * ((float)rand.Next(100, 121) / 100));
+            strength = (int)(level * ((float)rand.Next(30, 36) / 100));
             luck = 0;
-            speed = 0;
             return;
         }
         if (type == 3)
         {
-            defense = level * (rand.Next(85, 106) / 100);
-            strength = 0;
+            defense = (int)(level * ((float)rand.Next(85, 106) / 100));
+            strength = (int)(level * ((float)rand.Next(40, 56) / 100));
             luck = 0;
-            speed = level * (rand.Next(30, 36) / 100);
             return;
         }
         if (type == 4)
         {
-            defense = level * (rand.Next(30, 36) / 100);
+            defense = (int)(level * ((float)rand.Next(30, 36) / 100));
             strength = 0;
             luck = 0;
-            speed = level * (rand.Next(85, 101) / 100);
             return;
         }
         if (type == 5)
         {
             defense = 0;
-            strength = level * (rand.Next(125, 151) / 100);
-            luck = level * (rand.Next(70, 86) / 100);
-            speed = 0;
+            strength = (int)(level * ((float)rand.Next(125, 151) / 100));
+            luck = (int)(level * ((float)rand.Next(70, 86) / 100));
             return;
         }
         if (type == 6)
         {
-            defense = level * (rand.Next(1, 101) / 100);
-            strength = level * (rand.Next(1, 101) / 100);
-            luck = level * (rand.Next(1, 101) / 100);
-            speed = level * (rand.Next(1, 101) / 100);
+            defense = (int)(level * ((float)rand.Next(1, 101) / 100));
+            strength = (int)(level * ((float)rand.Next(1, 101) / 100));
+            luck = (int)(level * ((float)rand.Next(1, 101) / 100));
             return;
         }
         if (type == 7)
@@ -97,7 +132,6 @@ public class Item
         defense = 0;
         strength = 0;
         luck = 0;
-        speed = 0;
     }
 
     public Boolean Equals(Item CompareTo)
@@ -106,8 +140,7 @@ public class Item
         if (this.itemType == CompareTo.itemType 
             && this.defense == CompareTo.defense 
             && this.strength == CompareTo.strength 
-            && this.luck == CompareTo.luck 
-            && this.speed == CompareTo.speed)
+            && this.luck == CompareTo.luck)
         {
             return true;
         }
